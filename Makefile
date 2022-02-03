@@ -17,19 +17,19 @@ help:
 src/main/resources/de/thomas_oster/visicut/gui/resources/splash.png: splashsource.svg src/main/resources/de/thomas_oster/visicut/gui/resources/VisicutApp.properties
 	./generatesplash.sh
 jar: src/main/resources/de/thomas_oster/visicut/gui/resources/splash.png libLaserCut
-	mvn initialize
-	mvn package
+	mvn -q initialize
+	mvn -q package
 dist:
 	./distribute/distribute.sh
 run: jar
 	java -Xmx2048m -Xms256m -jar target/visicut*full.jar
 libLaserCut:
 	@test -f LibLaserCut/pom.xml  || { echo "Error: the LibLaserCut submodule is missing. Try running 'git submodule update --init'."; false; }
-	cd LibLaserCut && mvn install
+	cd LibLaserCut && mvn -q install
 	cd ..
 clean:
 	rm -f src/main/resources/de/thomas_oster/visicut/gui/resources/splash.png
-	mvn clean
+	mvn -q clean
 install:
 	mkdir -p $(DESTDIR)$(PREFIX)/share/visicut
 	cp target/visicut*full.jar $(DESTDIR)$(PREFIX)/share/visicut/Visicut.jar
