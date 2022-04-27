@@ -30,3 +30,7 @@ jobs:
       run: ls -s LibLaserCut/target
     - name: Build VisitCut
       run: make
+    - uses: actions/upload-artifact@v3
+      with:
+        name: ruida-jar
+        path: target/visicut-1.9-SNAPSHOT-full.jar
